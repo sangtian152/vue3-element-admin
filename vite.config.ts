@@ -13,7 +13,7 @@ export default defineConfig({
     assetsDir: 'static/img/', // 指定生成静态资源的存放路径
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        /* manualChunks(id) {
           if (id.includes('node_modules')) {
             const arr = id.toString().split('node_modules/')[1].split('/')
             switch(arr[0]) {
@@ -29,7 +29,7 @@ export default defineConfig({
                 break
             }
           }
-        },
+        }, */
         chunkFileNames: 'static/js1/[name]-[hash].js',
         entryFileNames: 'static/js2/[name]-[hash].js',
         assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
