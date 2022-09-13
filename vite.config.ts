@@ -6,7 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/vue3-element-admin/',
   build: {
     sourcemap: true,
     outDir: 'dist', //指定输出路径
