@@ -8,13 +8,15 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   base: '/vue3-element-admin/',
   build: {
+    sourcemap: true,
+    outDir: 'dist', //指定输出路径
+    assetsDir: 'static/img/', // 指定生成静态资源的存放路径
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
             const arr = id.toString().split('node_modules/')[1].split('/')
             switch(arr[0]) {
-              case '@sangtian152':
               case '@popperjs':
               case '@vue':
               case 'axios':
@@ -32,7 +34,10 @@ export default defineConfig({
         entryFileNames: 'static/js2/[name]-[hash].js',
         assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
       },
-    }
+    },
+    // brotliSize: false, // 不统计
+    target: 'esnext', 
+    minify: 'esbuild' // 混淆器，terser构建后文件体积更小
   },
   plugins: [vue(), vueJsx()],
   resolve: {
