@@ -1,0 +1,1 @@
+import{aG as t,aD as a}from"./__vendor-5f7ed3ec.js";import{z as n,p as s,q as r,v as p}from"./_@vue-5d42028f.js";import"./_@sangtian152-03d07981.js";const f=n({__name:"index",setup(c){const e=t(),{params:o}=a();return s(()=>{setTimeout(()=>{e.replace({path:decodeURIComponent(o.path)})},50)}),(m,u)=>(r(),p("span"))}});export{f as default};
