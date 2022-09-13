@@ -2,6 +2,7 @@ import router, { addRoutes } from '@/router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { ElMessage } from 'element-plus'
+import type { MessageParamsWithType } from 'element-plus'
 import type { RouteLocationNormalized } from 'vue-router'
 import setting from './settings'
 import { useRouteStore } from '@/stores/routes'
@@ -14,7 +15,6 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   const userStore = useUserStore()
   const routeStore = useRouteStore()
   NProgress.start();
-  console.log(userStore.token, 17)
   if (userStore.token) {
     if (to.path === '/login') {
       // If is login, redirect to the home page
@@ -33,7 +33,7 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
           next()
         } catch(err) {
           userStore.resetToken();
-          ElMessage.error(err || "error")
+          ElMessage.error((err || "error") as MessageParamsWithType)
           next(`/login?redirect=${to.path}`);
           NProgress.done()
         }
