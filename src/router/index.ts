@@ -30,7 +30,7 @@ import Layout from '@/layout/index.vue'
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import(/* webpackChunkName: "redirect" */ '@/views/redirect/index.vue')
+        component: () => import('@/views/redirect/index.vue')
       }
     ]
   },
@@ -41,7 +41,7 @@ import Layout from '@/layout/index.vue'
     children: [
       {
         path: 'home',
-        component: () => import ( /* webpackChunkName: "dashboard" */ "@/views/home/index.vue"),
+        component: () => import ("@/views/home/index.vue"),
         name: 'Home',
         meta: { title: 'Dashboard', icon: 'HomeFilled', affix: true }
       }
@@ -71,7 +71,7 @@ import Layout from '@/layout/index.vue'
     children: [
       {
         path: 'base',
-        component: () => import('@/views/tree/index.vue'),
+        component: () => import('@/views/tree/baseTree.vue'),
         name: 'TreeBase',
         meta: { title: '组织树'}
       },

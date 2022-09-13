@@ -13,7 +13,6 @@
   "dependencies": {
     "@sangtian152/html2pdf": "^1.0.4",
     "@sangtian152/watermark": "^1.0.7",
-    "@types/path-browserify": "^1.0.0",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
     "js-cookie": "^3.0.1",
@@ -30,6 +29,7 @@
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.47",
     "@types/nprogress": "^0.2.0",
+    "@types/path-browserify": "^1.0.0",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",

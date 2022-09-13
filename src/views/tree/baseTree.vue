@@ -16,7 +16,7 @@
     <addTreeNode v-model:visible="addVisible" @submit="doSubmit" />
   </el-container>
 </template>
-<script lang="ts" setup>
+<script lang="ts" setup name="baseTree">
   import { ref, onMounted } from 'vue';
   import { getTreeData } from '@/api/tree'
   import { randomString } from '@/utils'
