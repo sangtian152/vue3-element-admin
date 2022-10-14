@@ -23,7 +23,20 @@
       </template>
       <template v-else>
         <el-form-item label="水印图片">
-          <img class="mark-img" :src="mark" alt="">
+          <img class="mark-img" :src="markImage" alt="">
+          <el-upload
+            class="upload-demo"
+            action=""
+            :show-file-list="false"
+            :http-request="doUpload"
+          >
+            <el-button type="primary">上传</el-button>
+            <template #tip>
+              <div class="el-upload__tip">
+                jpg/png files with a size less than 500KB.
+              </div>
+            </template>
+          </el-upload>
         </el-form-item>
         <el-form-item label="水印高度">
           <el-input v-model="options.markHeight" />
@@ -67,11 +80,13 @@
 </template>
 <script lang="ts" setup>
   import { ref, reactive, unref } from 'vue'
+  import type { UploadRequestOptions } from 'element-plus'
   import watermark from '@sangtian152/watermark'
   import imageBase64 from '@/assets/demo.jpg'
   import mark from '@/assets/mark-white.png'
   const type = ref('text')
   const text = ref('文字水印')
+  const markImage = ref(mark)
   const options = reactive({
     fontSize: 36,
     markHeight: 26,
@@ -87,10 +102,33 @@
     globalAlpha: '0.2'
   })
   const imageUrl = ref('')
+  const doUpload = (options:UploadRequestOptions) => {
+    getBase64(options.file).then(res => {
+      markImage.value = res as string
+    })
+  }
+  // 将file文件上传转化为base64进行显示
+  const getBase64 = (file:File) => {
+      return new Promise((resolve, reject) => {
+          ///FileReader类就是专门用来读文件的
+          const reader = new FileReader()
+          //开始读文件
+          //readAsDataURL: dataurl它的本质就是图片的二进制数据， 进行base64加密后形成的一个字符串，
+          reader.readAsDataURL(file)
+          // 成功和失败返回对应的信息，reader.result一个base64，可以直接使用
+          reader.onload = () => {
+            resolve(reader.result)
+          }
+          // 失败返回失败的信息
+          reader.onerror = (error) => {
+            reject(error)
+          }
+      })
+  }
   const onSubmit = () => {
     const can = new watermark(imageBase64, options);
     // unref(type) 等价于 type.value
-    unref(type) === 'text' ? can.addText(text.value) : can.addImage(mark)
+    unref(type) === 'text' ? can.addText(text.value) : can.addImage(markImage.value)
     can.draw(function() {
         console.log('水印设置成功')
         imageUrl.value = can.getBase64()
