@@ -6,12 +6,7 @@
       :show-file-list="false"
       :http-request="doUploadSource"
     >
-      <el-button type="primary">上传</el-button>
-      <template #tip>
-        <div class="el-upload__tip">
-          jpg/png files with a size less than 500KB.
-        </div>
-      </template>
+      <el-button size="default" type="primary">上传原图</el-button>
     </el-upload>
     <div class="img-box">
       <img :src="sourceImage" alt="" />
@@ -43,7 +38,7 @@
             :show-file-list="false"
             :http-request="doUpload"
           >
-            <el-button type="primary">上传</el-button>
+            <el-button type="primary">上传水印</el-button>
             <template #tip>
               <div class="el-upload__tip">
                 jpg/png files with a size less than 500KB.
