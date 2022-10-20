@@ -1,7 +1,20 @@
 <template>
   <div class="page-container">
+    <el-upload
+      class="upload-demo"
+      action=""
+      :show-file-list="false"
+      :http-request="doUploadSource"
+    >
+      <el-button type="primary">上传</el-button>
+      <template #tip>
+        <div class="el-upload__tip">
+          jpg/png files with a size less than 500KB.
+        </div>
+      </template>
+    </el-upload>
     <div class="img-box">
-      <img src="@/assets/demo.jpg" alt="" />
+      <img :src="sourceImage" alt="" />
       <img :src="imageUrl" alt="" />
     </div>
     <el-form
@@ -87,6 +100,7 @@
   const type = ref('text')
   const text = ref('文字水印')
   const markImage = ref(mark)
+  const sourceImage = ref(imageBase64)
   const options = reactive({
     fontSize: 36,
     markHeight: 26,
@@ -102,6 +116,11 @@
     globalAlpha: '0.2'
   })
   const imageUrl = ref('')
+  const doUploadSource = (options:UploadRequestOptions) => {
+    getBase64(options.file).then(res => {
+      sourceImage.value = res as string
+    })
+  }
   const doUpload = (options:UploadRequestOptions) => {
     getBase64(options.file).then(res => {
       markImage.value = res as string
@@ -126,7 +145,7 @@
       })
   }
   const onSubmit = () => {
-    const can = new watermark(imageBase64, options);
+    const can = new watermark(sourceImage.value, options);
     // unref(type) 等价于 type.value
     unref(type) === 'text' ? can.addText(text.value) : can.addImage(markImage.value)
     can.draw(function() {
