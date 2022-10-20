@@ -140,7 +140,12 @@
       })
   }
   const onSubmit = () => {
-    const can = new watermark(sourceImage.value, options);
+    // options.fontSize = 
+    const payload = { ...options }
+    payload.fontSize = Number(payload.fontSize)
+    payload.markHeight = Number(payload.markHeight)
+    payload.lineSpacing = Number(payload.lineSpacing)
+    const can = new watermark(sourceImage.value, payload);
     // unref(type) 等价于 type.value
     unref(type) === 'text' ? can.addText(text.value) : can.addImage(markImage.value)
     can.draw(function() {
