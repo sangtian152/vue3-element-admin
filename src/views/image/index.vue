@@ -12,9 +12,10 @@
       <img :src="sourceImage" class="source-image" alt="" />
       <div class="target-image">
         <div v-show="!imageUrl" class="placeholder">
-          鼠标右键单击图片，点"图片另存为"即可保存到本地
+          点击“立即下载”按钮<br />或鼠标右键单击图片，点"图片另存为"<br />即可保存到本地
         </div>
         <img :src="imageUrl || sourceImage" alt="" />
+        <el-button type="primary" plain class="load-btn" @click="downloadImage">立即下载</el-button>
       </div>
     </div>
     <el-form
@@ -98,6 +99,7 @@
   import { ref, reactive, unref } from 'vue'
   import type { UploadRequestOptions } from 'element-plus'
   import watermark from '@sangtian152/watermark'
+  import { parseTime } from '@/utils'
   import imageBase64 from '@/assets/demo.jpg'
   import mark from '@/assets/mark-white.png'
   const type = ref('text')
@@ -129,6 +131,13 @@
     getBase64(options.file).then(res => {
       markImage.value = res as string
     })
+  }
+  // 单张图片下载
+  const downloadImage = () => {
+    const link = document.createElement('a')
+    link.setAttribute('download', '水印图片-' + parseTime(new Date(), '{y}{m}{d}_{h}{i}{s}') + '.jpg')
+    link.href = imageUrl.value
+    link.click()
   }
   // 将file文件上传转化为base64进行显示
   const getBase64 = (file:File) => {
@@ -175,6 +184,12 @@
     .target-image {
       img {
         width: 100%;
+        vertical-align: middle;
+      }
+      .load-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
       }
     }
     .placeholder {
@@ -186,7 +201,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
       color: #666;
       background: #eee;
       border: 1px solid #ddd;

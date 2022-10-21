@@ -9,7 +9,7 @@ import { useRouteStore } from '@/stores/routes'
 import { useUserStore } from '@/stores/user'
 NProgress.configure({ showSpinner: false });
 
-const whiteList = ['/login'];
+const whiteList = ['/login', '/image/watermark'];
 
 router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormalized, next:Function)=>{
   const userStore = useUserStore()
