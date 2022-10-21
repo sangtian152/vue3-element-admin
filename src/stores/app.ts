@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
+    device: 'desktop',
     sidebar: {
       collapse: false
     }
@@ -12,6 +13,9 @@ export const useAppStore = defineStore({
   actions: {
     toggleSideBar(collapse:boolean) {
       this.sidebar.collapse = collapse
-    }
+    },
+    toggleDevice(device:string) {
+      this.device = device
+    },
   }
 })
