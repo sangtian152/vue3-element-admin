@@ -10,7 +10,10 @@
     </el-upload>
     <div class="img-box">
       <img :src="sourceImage" alt="" />
-      <img :src="imageUrl" alt="" />
+      <div v-show="!imageUrl" class="placeholder">
+        鼠标右键单击图片，点"图片另存为"即可保存到本地
+      </div>
+      <img v-show="imageUrl" :src="imageUrl" alt="" />
     </div>
     <el-form
       label-width="100px"
@@ -158,8 +161,18 @@
   .img-box {
     display: flex;
     justify-content: space-between;
+    .placeholder {
+      width: 49%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #666;
+      background: #eee;
+      border: 1px solid #ddd;
+    }
     img {
-      width: 48%;
+      width: 49%;
     }
   }
   .mark-img {
