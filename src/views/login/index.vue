@@ -32,7 +32,8 @@
 	import { validUsername } from '@/utils/validate'
 	import { useUserStore } from '@/stores/user'
   import type { FormInstance, FormRules } from 'element-plus'
-	import { useRouter } from 'vue-router'
+	import { useRouter, useRoute } from 'vue-router'
+  const route = useRoute()
   const router = useRouter()
   const loginFormRef = ref<FormInstance>()
   const loginForm = reactive({
@@ -68,10 +69,10 @@
     username: [{ validator: validateUsername, trigger: 'blur' }],
     password: [{ validator: validatePassword, trigger: 'blur' }]
   })
-  let redirect = ''
   let otherQuery = {}
   const	handleLogin = (loginFormRef: FormInstance | undefined) => {
     if (!loginFormRef) return
+    let redirect = route.query.redirect as string
     loginFormRef.validate(async(valid: boolean) => {
       if (valid) {
         loading.value = true
