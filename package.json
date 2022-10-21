@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@sangtian152/html2pdf": "^1.0.4",
-    "@sangtian152/watermark": "^1.0.7",
+    "@sangtian152/watermark": "^1.0.9",
     "axios": "^0.27.2",
     "element-plus": "^2.2.15",
     "js-cookie": "^3.0.1",

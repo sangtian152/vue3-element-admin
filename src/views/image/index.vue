@@ -16,7 +16,7 @@
       <img v-show="imageUrl" :src="imageUrl" alt="" />
     </div>
     <el-form
-      label-width="100px"
+      label-width="110px"
       :model="options"
       style="max-width: 460px"
     >
@@ -80,8 +80,11 @@
           <el-input v-model="options.translate" />
         </el-form-item>
       </template>
-      <el-form-item label="不透明度">
+      <el-form-item label="不透明度（0-1）">
         <el-input v-model="options.globalAlpha" />
+      </el-form-item>
+      <el-form-item label="图片质量（0-1）">
+        <el-input v-model="options.quality" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">生成水印</el-button>
@@ -100,6 +103,7 @@
   const markImage = ref(mark)
   const sourceImage = ref(imageBase64)
   const options = reactive({
+    quality: 0.8,
     fontSize: 36,
     markHeight: 26,
     repeat: true,
