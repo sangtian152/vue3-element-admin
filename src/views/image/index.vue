@@ -9,11 +9,13 @@
       <el-button size="default" type="primary">上传原图</el-button>
     </el-upload>
     <div class="img-box">
-      <img :src="sourceImage" alt="" />
-      <div v-show="!imageUrl" class="placeholder">
-        鼠标右键单击图片，点"图片另存为"即可保存到本地
+      <img :src="sourceImage" class="source-image" alt="" />
+      <div class="target-image">
+        <div v-show="!imageUrl" class="placeholder">
+          鼠标右键单击图片，点"图片另存为"即可保存到本地
+        </div>
+        <img :src="imageUrl || sourceImage" alt="" />
       </div>
-      <img v-show="imageUrl" :src="imageUrl" alt="" />
     </div>
     <el-form
       label-width="110px"
@@ -165,8 +167,22 @@
   .img-box {
     display: flex;
     justify-content: space-between;
-    .placeholder {
+    .source-image,
+    .target-image {
       width: 49%;
+      position: relative;
+    }
+    .target-image {
+      img {
+        width: 100%;
+      }
+    }
+    .placeholder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -174,9 +190,7 @@
       color: #666;
       background: #eee;
       border: 1px solid #ddd;
-    }
-    img {
-      width: 49%;
+      z-index: 1;
     }
   }
   .mark-img {
@@ -185,5 +199,14 @@
   }
   .el-form {
     margin-top: 10px;
+  }
+  @media (max-width: 992px) {
+    .img-box {
+      flex-wrap: wrap;
+      .source-image,
+      .target-image {
+        width: 100%;
+      }
+    }
   }
 </style>
